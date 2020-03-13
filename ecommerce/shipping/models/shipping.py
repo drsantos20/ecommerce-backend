@@ -19,11 +19,16 @@ class Shipping(models.Model):
         (SEA, 'SEA'),
     ]
 
-    type = models.CharField(
+    shipment_type = models.CharField(
         max_length=30,
         choices=SHIPMENT_TYPE_CHOICES,
     )
 
     cost = models.PositiveIntegerField(
-        help_text='in cents'
+        help_text='in cents',
+        null=True
     )
+
+    def __str__(self) -> str:
+        return self.name
+

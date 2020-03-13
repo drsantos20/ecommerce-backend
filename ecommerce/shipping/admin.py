@@ -1,4 +1,4 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Shipping
+from .models import Sea, Air, Ground
