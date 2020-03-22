@@ -26,7 +26,8 @@ class Shipping(models.Model):
 
     cost = models.PositiveIntegerField(
         help_text='in cents',
-        null=True
+        null=True,
+        default=0
     )
 
     def __str__(self) -> str:
