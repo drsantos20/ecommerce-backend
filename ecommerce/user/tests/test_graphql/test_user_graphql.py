@@ -33,3 +33,23 @@ class UserProfileTestQuery(GraphQLTestCase):
         self.assertEqual(user_from_query['email'], self.user.email)
         self.assertEqual(user_from_query['location'], self.user.location)
 
+    def test_get_user_by_id(self):
+        response = self.query(
+            '''
+            query user($id: Int!){
+                user(id: $id) {
+                    email,
+                    location
+                }
+            }
+            ''',
+            variables={'id': 1}
+        )
+
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, 200)
+        user_from_query = content['data']['user']
+
+        self.assertEqual(user_from_query['email'], self.user.email)
+        self.assertEqual(user_from_query['location'], self.user.location)
+
