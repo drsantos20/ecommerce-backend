@@ -9,7 +9,7 @@ class UserQueryType(DjangoObjectType):
         model = UserProfile
 
 
-class Query(object):
+class UserQuery(object):
     all_users = graphene.List(UserQueryType)
 
     user = graphene.Field(
