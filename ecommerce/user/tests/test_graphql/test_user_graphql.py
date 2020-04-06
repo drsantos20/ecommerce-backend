@@ -76,10 +76,29 @@ class UserProfileMutation(GraphQLTestCase):
             variables={'email': self.user.email, 'location': 'London'}
         )
 
-        print(response.content)
         content = json.loads(response.content)
         self.assertEqual(response.status_code, 200)
         user_from_query = content['data']['updateUser']['user']
 
         self.assertEqual(user_from_query['email'], self.user.email)
         self.assertEqual(user_from_query['location'], 'London')
+
+    def test_crete_user(self):
+        response = self.query(
+            '''
+            mutation createUser($email: String!, $username: String!){
+                createUser(email: $email, username: $username) {
+                    user {
+                        email
+                    }
+                }
+            }
+            ''',
+            variables={'email': 'batman@dc.com', 'username': 'batman'}
+        )
+
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, 200)
+        user_from_query = content['data']['createUser']['user']
+
+        self.assertEqual(user_from_query['email'], 'batman@dc.com')
