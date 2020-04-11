@@ -12,6 +12,7 @@ class Shipping(models.Model):
         abstract = True
 
     name = models.CharField(max_length=30)
+    weight = models.PositiveIntegerField(null=True, default=0)
 
     SHIPMENT_TYPE_CHOICES = [
         (GROUND, 'GROUND'),
