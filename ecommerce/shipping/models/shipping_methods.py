@@ -4,7 +4,6 @@ from ecommerce.shipping.models import Shipping
 
 
 class Sea(Shipping):
-    weight = models.PositiveIntegerField(null=True, default=0)
 
     @property
     def value(self):
@@ -12,7 +11,6 @@ class Sea(Shipping):
 
 
 class Ground(Shipping):
-    weight = models.PositiveIntegerField(null=True, default=0)
 
     @property
     def value(self):
@@ -20,7 +18,6 @@ class Ground(Shipping):
 
 
 class Air(Shipping):
-    weight = models.PositiveIntegerField(null=True, default=0)
 
     @property
     def value(self):
