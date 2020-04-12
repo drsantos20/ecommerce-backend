@@ -1,4 +1,3 @@
-from django.db import models
 
 from ecommerce.shipping.models import Shipping
 
