@@ -16,6 +16,14 @@ Following these instructions will make this project running in your local machin
 - Postgres  [psycopg](http://initd.org/psycopg/docs/install.html)
 ```
 
+### Installing
+```buildoutcfg
+1- cd ecommerce-backend
+2- python3 -m venv env
+3- source env/bin/activate
+4- pip install -r requirements.txt
+```
+
 ### Running tests
 
 ```buildoutcfg
