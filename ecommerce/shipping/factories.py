@@ -1,5 +1,6 @@
 import factory
 
+from ecommerce.order.factories import OrderFactory
 from ecommerce.shipping.models import Sea, Air, Ground, Shipping
 
 
@@ -14,15 +15,21 @@ class ShippingFactory(factory.DjangoModelFactory):
 
 
 class SeaFactory(factory.DjangoModelFactory):
+    order = factory.SubFactory(OrderFactory)
+
     class Meta:
         model = Sea
 
 
 class GroundFactory(factory.DjangoModelFactory):
+    order = factory.SubFactory(OrderFactory)
+
     class Meta:
         model = Ground
 
 
 class AirFactory(factory.DjangoModelFactory):
+    order = factory.SubFactory(OrderFactory)
+
     class Meta:
         model = Air
