@@ -1,5 +1,6 @@
 import factory
 
+from ecommerce.order.factories import OrderFactory
 from ecommerce.product.models import (
     Product,
     Book,
@@ -18,6 +19,7 @@ class ProductFactory(factory.DjangoModelFactory):
 
 class BookFactory(factory.DjangoModelFactory):
     weight = factory.Iterator([1, 2])
+    order = factory.SubFactory(OrderFactory)
 
     class Meta:
         model = Book
@@ -25,6 +27,7 @@ class BookFactory(factory.DjangoModelFactory):
 
 class EBookFactory(factory.DjangoModelFactory):
     download_link = factory.Faker('pystr')
+    order = factory.SubFactory(OrderFactory)
 
     class Meta:
         model = EBook

@@ -1,1 +1,1 @@
-from .order import Order, OrderDetail
+from .order import Order

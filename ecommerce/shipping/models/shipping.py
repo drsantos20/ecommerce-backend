@@ -5,6 +5,7 @@ from ecommerce.order.constants import (
     AIR,
     SEA,
 )
+from ecommerce.order.models import Order
 
 
 class Shipping(models.Model):
@@ -13,6 +14,7 @@ class Shipping(models.Model):
 
     name = models.CharField(max_length=30)
     weight = models.PositiveIntegerField(null=True, default=0)
+    order = models.ForeignKey(Order, related_name='shipping', on_delete=models.CASCADE)
 
     SHIPMENT_TYPE_CHOICES = [
         (GROUND, 'GROUND'),
