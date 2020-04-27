@@ -18,5 +18,6 @@ from django.urls import path, re_path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('ecommerce/(?P<version>(v1|v2))/', include('ecommerce.user.urls'))
+    re_path('ecommerce/(?P<version>(v1|v2))/', include('ecommerce.user.urls')),
+    re_path('ecommerce/(?P<version>(v1|v2))/', include('ecommerce.shipping.urls'))
 ]
