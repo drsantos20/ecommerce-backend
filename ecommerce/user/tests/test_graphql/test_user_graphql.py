@@ -2,7 +2,7 @@ import json
 
 from graphene_django.utils.testing import GraphQLTestCase
 
-from ecommerce.schema import Query, Mutation, schema
+from ecommerce.user.schema import Query, schema
 from ecommerce.user.factories import UserProfileFactory
 
 
