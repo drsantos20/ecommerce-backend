@@ -1,10 +1,11 @@
-from django.conf.urls import url
-from django.views.decorators.csrf import csrf_exempt
-from graphene_django.views import GraphQLView
+from django.urls import path, include
+from rest_framework import routers
 
-from ecommerce.user.schema import schema
+from ecommerce.user import viewsets
+
+router = routers.SimpleRouter()
+router.register(r'users', viewsets.UserProfileModelViewSet)
 
 urlpatterns = [
-    url(r'^users/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
+    path('', include(router.urls)),
 ]
-
