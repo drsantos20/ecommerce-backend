@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 import factory
 from django.contrib.auth.models import User
@@ -20,6 +20,6 @@ class UserProfileFactory(factory.DjangoModelFactory):
 
     user_type = factory.Iterator([1, 2])
     location = factory.Iterator(["France", "Italy", "Spain"])
-    birth_date = factory.LazyFunction(datetime.now)
+    birth_date = factory.LazyFunction(datetime.date.today)
     email = factory.Iterator(["drsantos20@gmail.com", "batman@dc.com", "flash@dc.com"])
     user = factory.SubFactory(UserFactory)
