@@ -1,24 +1,24 @@
 
 from django.test import TestCase
 
-from ecommerce.shipping.factories import SeaFactory, GroundFactory, AirFactory
-from ecommerce.shipping.models import Sea, Air, Ground
+from ecommerce.order.constants import SEA, AIR, GROUND
+from ecommerce.shipping.factories import Shipping, ShippingFactory
 
 
 class ShippingTypeTestCase(TestCase):
     def setUp(self):
-        self.sea = SeaFactory(weight=10, cost=2)
-        self.ground = GroundFactory(weight=10, cost=1)
-        self.air = AirFactory(weight=10, cost=4)
+        self.sea = ShippingFactory(weight=10, cost=2, shipment_type=SEA)
+        self.ground = ShippingFactory(weight=10, cost=1, shipment_type=GROUND)
+        self.air = ShippingFactory(weight=10, cost=4, shipment_type=AIR)
 
     def test_get_sea_cost(self):
-        sea = Sea.objects.get(id=self.sea.id)
+        sea = Shipping.objects.get(id=self.sea.id)
         self.assertEqual(sea.value, 20)
 
     def test_get_ground_cost(self):
-        sea = Ground.objects.get(id=self.sea.id)
-        self.assertEqual(sea.value, 10)
+        ground = Shipping.objects.get(id=self.ground.id)
+        self.assertEqual(ground.value, 10)
 
     def test_get_air_cost(self):
-        sea = Air.objects.get(id=self.sea.id)
-        self.assertEqual(sea.value, 40)
+        air = Shipping.objects.get(id=self.air.id)
+        self.assertEqual(air.value, 40)
