@@ -3,7 +3,6 @@ from django.test import TestCase
 from ecommerce.order.factories import OrderFactory
 from ecommerce.order.models.order import Order
 from ecommerce.product.factories import BookFactory, EBookFactory
-from ecommerce.shipping.factories import SeaFactory
 from ecommerce.user.factories import UserFactory
 
 
@@ -13,7 +12,6 @@ class OrderTestCase(TestCase):
 
         self.order = OrderFactory(user=self.user)
         self.book = BookFactory(weight=10, price=2, order=self.order)
-        self.sea = SeaFactory(cost=10, weight=self.book.weight, order=self.order)
 
         self.user_with_e_book_order = UserFactory()
         self.order_with_e_book = OrderFactory(user=self.user)

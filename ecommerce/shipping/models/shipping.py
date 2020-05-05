@@ -9,9 +9,6 @@ from ecommerce.order.models import Order
 
 
 class Shipping(models.Model):
-    class Meta:
-        abstract = True
-
     name = models.CharField(max_length=30)
     weight = models.PositiveIntegerField(null=True, default=0)
     order = models.ForeignKey(Order, related_name='shipping', on_delete=models.CASCADE)
@@ -33,6 +30,9 @@ class Shipping(models.Model):
         default=0
     )
 
+    @property
+    def value(self):
+        return self.cost * self.weight
+
     def __str__(self) -> str:
         return self.name
-

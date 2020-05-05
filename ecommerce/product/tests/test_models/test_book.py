@@ -3,8 +3,6 @@ from django.test import TestCase
 
 from ecommerce.product.factories import BookFactory, EBookFactory
 from ecommerce.product.models import Book, EBook
-from ecommerce.shipping.factories import SeaFactory
-from ecommerce.shipping.models import Sea
 
 
 class BookTestCase(TestCase):
