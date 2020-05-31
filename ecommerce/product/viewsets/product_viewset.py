@@ -1,14 +1,17 @@
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 
-from ecommerce.product.serializers.product_serializer import ProductGenericSerializer
+from ecommerce.product.utils import get_model_by_name, url_params_validation
 
 
-class GeneralViewSet(viewsets.ModelViewSet):
+class ProductViewSet(ModelViewSet):
 
     def get_queryset(self):
-        model = self.kwargs.get('model')
-        return model.objects.all()
+        model_name = url_params_validation(self.kwargs)
+        product = get_model_by_name(model_name)
+        return product.objects.all()
 
     def get_serializer_class(self):
-        ProductGenericSerializer.Meta.model = self.kwargs.get('model')
-        return ProductGenericSerializer
+        model_name = url_params_validation(self.kwargs)
+        product = get_model_by_name(model_name)
+        serializer_class = product.get_serializer()
+        return serializer_class
