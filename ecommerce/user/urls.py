@@ -4,7 +4,7 @@ from rest_framework import routers
 from ecommerce.user import viewsets
 
 router = routers.SimpleRouter()
-router.register(r'users', viewsets.UserProfileModelViewSet)
+router.register(r'user/(?P<type>[-\w]+)', viewsets.UserProfileViewSet, basename='user')
 
 urlpatterns = [
     path('', include(router.urls)),

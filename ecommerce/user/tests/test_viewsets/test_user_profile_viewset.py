@@ -16,7 +16,7 @@ class TestUserProfileViewSet(APITestCase):
 
     def test_get_all_users(self):
         response = self.client.get(
-            reverse('userprofile-list', kwargs={'version': 'v1'})
+            reverse('user-list', kwargs={'version': 'v1', 'type': 'userprofile'})
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
