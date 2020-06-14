@@ -3,17 +3,16 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from ecommerce.product.utils import (
-    get_model_by_name,
-    url_params_validation,
     get_generic_serializer,
 )
+from ecommerce.utils import get_model_by_name, url_params_validation
 
 
 class ProductViewSet(ModelViewSet, CreateModelMixin):
 
     def get_queryset(self):
         model_name = url_params_validation(self.kwargs)
-        product = get_model_by_name(model_name)
+        product = get_model_by_name('product', model_name)
         return product.objects.all()
 
     def create(self, request, *args, **kwargs):
