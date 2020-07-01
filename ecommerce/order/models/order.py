@@ -4,4 +4,4 @@ from ecommerce.user.models.user_profile import User
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(User, on_delete=models.CASCADE)
