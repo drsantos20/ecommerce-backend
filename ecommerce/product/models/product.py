@@ -1,13 +1,25 @@
 from django.db import models
 from rest_framework import serializers
 
+from ecommerce.product.models.category import Category
+
 
 class Product(models.Model):
-    class Meta:
-        abstract = True
+    title = models.CharField(max_length=100)
+    description = models.TextField(max_length=500, blank=True, null=True)
+    price = models.PositiveIntegerField(null=True)
+    active = models.BooleanField(default=True)
+    categories = models.ManyToManyField(Category, blank=True)
+    default = models.ForeignKey(Category, related_name='default_category', null=True, blank=True, on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=30, blank=True, null=True)
-    price = models.PositiveIntegerField(help_text='in cents', blank=True, null=True)
+    def __unicode__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        super(Product, self).save(*args, **kwargs)
+        if self.variation_set.all().count() == 0:
+            from ecommerce.product.models import Variation
+            Variation.objects.create(product=self, price=self.price, title='Default')
 
     @classmethod
     def get_serializer(cls):

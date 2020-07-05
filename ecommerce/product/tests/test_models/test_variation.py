@@ -1,10 +1,12 @@
 from unittest import TestCase
 
+from ecommerce.product.factories import VariationFactory
+from ecommerce.product.models.variation import Variation
 
-class VariationCase(TestCase):
+
+class TestProductVariationCase(TestCase):
     def setUp(self) -> None:
+        pass
 
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_get_product_variation(self):
+        pass

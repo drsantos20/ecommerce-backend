@@ -1,11 +1,10 @@
 from django.db import models
 
-from ecommerce.cart.models.cart import Cart
 from ecommerce.product.models.variation import Variation
 
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     item = models.ForeignKey(Variation, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
