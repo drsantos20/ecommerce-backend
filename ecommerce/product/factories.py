@@ -1,25 +1,34 @@
 import factory
 
-from ecommerce.order.factories import OrderFactory
 from ecommerce.product.models import (
     Product,
     Book,
     EBook,
+    Category,
 )
+from ecommerce.product.models.variation import Variation
+
+
+class CategoryFactory(factory.DjangoModelFactory):
+    title = factory.Faker('pystr')
+    slug = factory.Faker('pystr')
+    description = factory.Faker('pystr')
+
+    class Meta:
+        model = Category
 
 
 class ProductFactory(factory.DjangoModelFactory):
-    price = factory.Iterator([1, 2])
+    price = factory.Faker('pyint')
     name = factory.Faker('pystr')
+    categories = factory.SubFactory(CategoryFactory)
 
     class Meta:
         model = Product
-        abstract = True
 
 
 class BookFactory(factory.DjangoModelFactory):
     weight = factory.Iterator([1, 2])
-    order = factory.SubFactory(OrderFactory)
 
     class Meta:
         model = Book
@@ -27,7 +36,18 @@ class BookFactory(factory.DjangoModelFactory):
 
 class EBookFactory(factory.DjangoModelFactory):
     download_link = factory.Faker('pystr')
-    order = factory.SubFactory(OrderFactory)
 
     class Meta:
         model = EBook
+
+
+class VariationFactory(factory.DjangoModelFactory):
+    product = factory.SubFactory(ProductFactory)
+    title = factory.Faker('pystr')
+    price = factory.Faker('pyint')
+    sale_price = factory.Faker('pyint')
+    inventory = factory.Faker('pyint')
+
+    class Meta:
+        model = Variation
+
