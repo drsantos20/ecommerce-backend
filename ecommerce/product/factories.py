@@ -6,6 +6,7 @@ from ecommerce.product.models import (
     Book,
     EBook,
 )
+from ecommerce.product.models.variation import Variation
 
 
 class ProductFactory(factory.DjangoModelFactory):
@@ -31,3 +32,15 @@ class EBookFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = EBook
+
+
+class VariationFactory(factory.DjangoModelFactory):
+    product = factory.SubFactory(ProductFactory)
+    title = factory.Faker('pystr')
+    price = factory.Faker('pyint')
+    sale_price = factory.Faker('pyint')
+    active = factory.Faker('bool')
+    inventory = factory.Faker('pyint')
+
+    class Meta:
+        model = Variation
