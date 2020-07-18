@@ -10,7 +10,6 @@ class Product(models.Model):
     price = models.PositiveIntegerField(null=True)
     active = models.BooleanField(default=True)
     categories = models.ManyToManyField(Category, blank=True)
-    default = models.ForeignKey(Category, related_name='default_category', null=True, blank=True, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.title
