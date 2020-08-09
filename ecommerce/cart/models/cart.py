@@ -2,12 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from ecommerce.cart.models.cart_item import CartItem
-from ecommerce.product.models.variation import Variation
+from ecommerce.product.models.product_variation import ProductVariation
 
 
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    items = models.ManyToManyField(Variation, through=CartItem)
+    items = models.ManyToManyField(ProductVariation, through=CartItem)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 

@@ -1,4 +1,4 @@
 from .book import Book, EBook
 from .product import Product
-from .variation import Variation
+from .product_variation import ProductVariation
 from .category import Category

@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
             name='price',
         ),
         migrations.CreateModel(
-            name='Variation',
+            name='ProductVariation',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=100)),
