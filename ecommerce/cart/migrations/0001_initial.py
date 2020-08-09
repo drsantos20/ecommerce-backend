@@ -29,13 +29,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveIntegerField(default=1)),
                 ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cart.Cart')),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.Variation')),
+                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.ProductVariation')),
             ],
         ),
         migrations.AddField(
             model_name='cart',
             name='items',
-            field=models.ManyToManyField(through='cart.CartItem', to='product.Variation'),
+            field=models.ManyToManyField(through='cart.CartItem', to='product.ProductVariation'),
         ),
         migrations.AddField(
             model_name='cart',

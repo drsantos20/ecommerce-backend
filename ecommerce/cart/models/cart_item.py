@@ -1,11 +1,11 @@
 from django.db import models
 
-from ecommerce.product.models.variation import Variation
+from ecommerce.product.models.product_variation import ProductVariation
 
 
 class CartItem(models.Model):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
-    item = models.ForeignKey(Variation, on_delete=models.CASCADE)
+    item = models.ForeignKey(ProductVariation, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     def __unicode__(self):

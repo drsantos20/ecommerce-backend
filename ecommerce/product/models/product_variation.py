@@ -3,19 +3,14 @@ from django.db import models
 from ecommerce.product.models import Product
 
 
-class Variation(models.Model):
+class ProductVariation(models.Model):
     title = models.CharField(max_length=100)
     price = models.PositiveIntegerField(null=True)
     sale_price = models.PositiveIntegerField(null=True, blank=True)
     active = models.BooleanField(default=True)
     inventory = models.IntegerField(null=True, blank=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='product_variation_set', on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return self.title
-
+    @property
     def get_price(self):
-        """
-        return sale price if not None otherwise return prices
-        """
         return self.sale_price if self.sale_price else self.price
