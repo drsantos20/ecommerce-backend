@@ -5,42 +5,46 @@ from rest_framework.test import APITestCase, APIClient
 
 from django.urls import reverse
 
-from ecommerce.order.factories import OrderFactory
-from ecommerce.product.factories import BookFactory, EBookFactory
-from ecommerce.product.models import EBook, Book
+from ecommerce.product.factories import ProductFactory
+from ecommerce.product.models import Product
 
 
 class TestProductViewSet(APITestCase):
     client = APIClient()
 
     def setUp(self) -> None:
-        self.book = BookFactory()
-        self.e_book = EBookFactory()
+        self.product = ProductFactory()
 
     def test_get_all_books(self):
         response = self.client.get(
-            reverse('product-list', kwargs={'version': 'v1', 'type': 'book'})
+            reverse('product-list', kwargs={'version': 'v1'})
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        book_data = json.loads(response.content)[0]
+        product_data = json.loads(response.content)[0]
 
-        self.assertEqual(book_data['weight'], self.book.weight)
+        self.assertEqual(product_data['title'], self.product.title)
+        self.assertEqual(product_data['price'], self.product.price)
+        self.assertEqual(product_data['active'], self.product.active)
 
-    def test_get_all_e_books(self):
-        response = self.client.get(
-            reverse('product-list', kwargs={'version': 'v1', 'type': 'ebook'})
+    def test_create_new_product_e_book(self):
+        data = json.dumps({
+            'title': 'samsung gear galaxy',
+            'brand': 'samsung',
+            'price': 800.00,
+            'image': 'http://example.com/samsung_gear.png'
+        })
+
+        response = self.client.post(
+            reverse('product-list', kwargs={'version': 'v1'}),
+            data=data,
+            content_type='application/json'
         )
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        e_book_data = json.loads(response.content)[0]
+        created_product = Product.objects.get(title='samsung gear galaxy')
 
-        self.assertEqual(e_book_data['download_link'], self.e_book.download_link)
-
-    def test_create_new_product_e_book_(self):
-        pass
-
-    def test_create_new_product_book_(self):
-        pass
+        self.assertTrue(created_product.title, 'samsung gear galaxy')
+        self.assertTrue(created_product.price, 800.00)
