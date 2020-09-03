@@ -29,8 +29,3 @@ Following these instructions will make this project running in your local machin
 ```buildoutcfg
 python manage.py test
 ```
-
-### Tools
-```buildoutcfg
-* [graphene-django](https://github.com/graphql-python/graphene-django) - graphql
-```
